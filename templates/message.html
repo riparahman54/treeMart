@@ -28,10 +28,12 @@
         .container {
             border: 2px solid #2e8b57; /* Border matching the heading color */
             border-radius: 10px;
-            padding: 20px;
+            padding: 30px 20px;
             background-color: white; /* White background for the box */
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-align: center; /* Center content inside the container */
+            width: 90%;
+            max-width: 400px; /* Limit the width for smaller screens */
         }
 
         p {
@@ -39,7 +41,24 @@
             margin: 10px 0;
         }
 
-        /* Styling for button */
+        /* Styling for links */
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 15px;
+            background-color: #2e8b57;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #276747;
+        }
+
+        /* Styling for logout button */
         button {
             margin-top: 20px;
             padding: 10px 20px;
@@ -56,17 +75,14 @@
             background-color: #276747;
         }
 
-        button a {
-            color: white;
-            text-decoration: none;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Welcome, {{ user.username }}</h1>
-    <a href="{% url 'tree_list' %}">TreeList</a>
-    <a href="{% url 'logout' %}">Logout</a>
+        <p>You have successfully logged in!</p>
+        <a href="{% url 'tree_list' %}">Go to Tree List</a><br>
+        <a href="{% url 'logout' %}">Logout</a>
     </div>
 </body>
 </html>

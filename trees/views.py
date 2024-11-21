@@ -12,7 +12,8 @@ def create_tree(request):
             return redirect('tree_list')
     else:
         form = TreeForm()
-        return render(request,'treeform.html',{'form':form})
+
+    return render(request,'treeform.html',{'form':form})
 
 def update_tree(request,t_id):
     l = Tree.objects.get(pk=t_id)
@@ -23,7 +24,7 @@ def update_tree(request,t_id):
             return redirect('tree_list')
     else:
         form = TreeForm(instance=l)
-        return render(request,'treeform.html',{'form':form})
+    return render(request,'treeform.html',{'form':form})
 
 def delete_tree(request,t_id):
     Tree.objects.get(pk=t_id).delete()
