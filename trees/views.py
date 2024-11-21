@@ -49,3 +49,15 @@ def photo_upload(request):
     else:
         form = TreeForm()
     return render(request, 'photo_upload.html', {'form': form})
+
+
+def add_to_cart(request, t_id):
+    if request.method == "POST":
+        tree = get_object_or_404(Tree, pk=t_id)
+        # Add your logic for cart (e.g., save to session, or Cart model)
+        # Example:
+        cart = request.session.get('cart', [])
+        cart.append(tree.id)  # Save the tree's ID to the session
+        request.session['cart'] = cart
+        return redirect('tree_list')
+    return redirect('tree_list')

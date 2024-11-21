@@ -107,6 +107,10 @@
                     <div class="tree-actions">
                         <a href="{% url 'update-tree' i.id %}">Update</a>
                         <a href="{% url 'delete-tree' i.id %}">Delete</a>
+                        <form action="{% url 'add-to-cart' i.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">Add to Cart</button>
+                        </form>
                     </div>
                 </div>
             {% endfor %}

@@ -27,5 +27,5 @@ urlpatterns = [
 
     path('photos/', views.photo_list, name='photo_list'),
     path('photos/upload/', views.photo_upload, name='photo_upload'),
-
+    path('add-to-cart/<int:t_id>/', views.add_to_cart, name='add-to-cart'),
 ]
