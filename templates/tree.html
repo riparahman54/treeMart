@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f8f9fa;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .action-links {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .action-links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        .action-links a:hover {
+            text-decoration: underline;
+        }
+        .tree-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .tree-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 300px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .tree-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #f0f0f0;
+        }
+        .tree-details {
+            padding: 15px;
+            text-align: center;
+        }
+        .tree-details h3 {
+            margin: 10px 0;
+            color: #333;
+        }
+        .tree-details p {
+            margin: 5px 0;
+            color: #666;
+        }
+        .tree-actions {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #ddd;
+            padding: 10px 15px;
+            background: #f9f9f9;
+        }
+        .tree-actions a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .tree-actions a:hover {
+            text-decoration: underline;
+        }
+        .no-trees {
+            text-align: center;
+            color: #666;
+            font-size: 18px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    {% load static %}
+    <h1>Tree List</h1>
+    
+    <div class="action-links">
+        <a href="{% url 'message' %}">Back to Dashboard</a>
+        <a href="{% url 'create-tree' %}">Add a New Tree</a>
+    </div>
+
+    {% if trees %}
+        <div class="tree-container">
+            {% for i in trees %}
+                <div class="tree-card">
+                    {% if i.image %}
+                        <img src="{{ i.image.url }}" class="tree-image" alt="{{ i.name }}">
+                    {% else %}
+                        <img src="{% static 'images/placeholder.png' %}" class="tree-image" alt="No Image">
+                    {% endif %}
+                    <div class="tree-details">
+                        <h3>{{ i.name }}</h3>
+                        <p>Category: {{ i.category }}</p>
+                        <p>Price: ${{ i.price }}</p>
+                    </div>
+                    <div class="tree-actions">
+                        <a href="{% url 'update-tree' i.id %}">Update</a>
+                        <a href="{% url 'delete-tree' i.id %}">Delete</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="no-trees">
+            <p>No trees available to display.</p>
+        </div>
+    {% endif %}
+</body>
+</html>

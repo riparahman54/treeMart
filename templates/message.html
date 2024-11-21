@@ -64,8 +64,9 @@
 </head>
 <body>
     <div class="container">
-        <h1>You Are Successfully Logged In!</h1>
-        <button><a href="/logout">LOG OUT</a></button>
+        <h1>Welcome, {{ user.username }}</h1>
+    <a href="{% url 'tree_list' %}">TreeList</a>
+    <a href="{% url 'logout' %}">Logout</a>
     </div>
 </body>
 </html>
