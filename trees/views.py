@@ -10,21 +10,29 @@ def create_tree(request):
         if form.is_valid():
             form.save()
             return redirect('tree_list')
+        else:
+            # Log form errors for debugging
+            print("Form Errors:", form.errors)
     else:
         form = TreeForm()
 
-    return render(request,'treeform.html',{'form':form})
+    return render(request, 'treeform.html', {'form': form})
 
-def update_tree(request,t_id):
-    l = Tree.objects.get(pk=t_id)
+
+def update_tree(request, t_id):
+    tree_instance = get_object_or_404(Tree, pk=t_id)  # Handle 404 if tree not found
     if request.method == "POST":
-        form = TreeForm(request.POST, request.FILES, instance=l)
+        form = TreeForm(request.POST, request.FILES, instance=tree_instance)
         if form.is_valid():
             form.save()
             return redirect('tree_list')
+        else:
+            # Log form errors for debugging
+            print("Form Errors:", form.errors)
     else:
-        form = TreeForm(instance=l)
-    return render(request,'treeform.html',{'form':form})
+        form = TreeForm(instance=tree_instance)
+
+    return render(request, 'treeform.html', {'form': form})
 
 def delete_tree(request,t_id):
     Tree.objects.get(pk=t_id).delete()
