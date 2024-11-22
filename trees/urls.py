@@ -28,4 +28,6 @@ urlpatterns = [
     path('photos/', views.photo_list, name='photo_list'),
     path('photos/upload/', views.photo_upload, name='photo_upload'),
     path('add-to-cart/<int:t_id>/', views.add_to_cart, name='add-to-cart'),
+    path('season/', views.select_season, name='select_season'),
+    path('season/<str:season>/', views.plants_by_season, name='plants_by_season'),
 ]

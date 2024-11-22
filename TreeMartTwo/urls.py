@@ -26,6 +26,9 @@ urlpatterns = [
     path('', include('login.urls')),
     path('trees/', include('trees.urls')),
     path('accounts/', include('accounts.urls')),
+    path('plant-guide/', views.plant_guide, name='plant_guide'),
+
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Plants for {{ season|title }}</title>
+</head>
+<body>
+    <h1>Plants Suitable for {{ season|title }}</h1>
+
+    {% if plants %}
+        <ul>
+            {% for plant in plants %}
+                <li>
+                    <h3>{{ plant.name }}</h3>
+                    <p>{{ plant.description }}</p>
+                    <p><strong>Care Tips:</strong> {{ plant.care_tips }}</p>
+                    {% if plant.image %}
+                        <img src="{{ plant.image.url }}" alt="{{ plant.name }}" style="width: 200px;">
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No plants found for this season.</p>
+    {% endif %}
+
+    <!-- Corrected Back Link -->
+    <a href="/trees/season/">Back to Season Selection</a>
+</body>
+</html>

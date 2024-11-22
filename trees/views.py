@@ -70,3 +70,12 @@ def add_to_cart(request, t_id):
         request.session['cart'] = cart
         return redirect('tree_list')
     return redirect('tree_list')
+
+def select_season(request):
+    # Display a form for selecting a season
+    return render(request, 'select_season.html')
+
+def plants_by_season(request, season):
+    # Fetch plants suitable for the selected season
+    plants = Tree.objects.filter(season=season)
+    return render(request, 'plants_by_season.html', {'plants': plants, 'season': season})
