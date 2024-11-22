@@ -54,6 +54,5 @@ def message(request):
     return render(request, "message.html")
 
 def logout_view(request):
-    logout(request)
-    return redirect('index.html')
+    return redirect('home')
 
