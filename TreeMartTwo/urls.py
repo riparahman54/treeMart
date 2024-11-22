@@ -26,7 +26,7 @@ urlpatterns = [
     path('', include('login.urls')),
     path('trees/', include('trees.urls')),
     path('accounts/', include('accounts.urls')),
-    path('plant-guide/', views.plant_guide, name='plant_guide'),
+    path('plant_guide/', include('plant_guide.urls')),
 
 
 ]

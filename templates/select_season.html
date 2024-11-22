@@ -1,3 +1,5 @@
+<!-- select_season.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +8,11 @@
 <body>
     <h1>Select a Season</h1>
     <ul>
-        <li><a href="summer/">Summer</a></li>
-        <li><a href="winter/">Winter</a></li>
-        <li><a href="spring/">Spring</a></li>
-        <li><a href="autumn/">Autumn</a></li>
-        <li><a href="other/">Other</a></li>
+        <li><a href="{% url 'plants_by_season' 'summer' %}">Summer</a></li>
+        <li><a href="{% url 'plants_by_season' 'winter' %}">Winter</a></li>
+        <li><a href="{% url 'plants_by_season' 'spring' %}">Spring</a></li>
+        <li><a href="{% url 'plants_by_season' 'autumn' %}">Autumn</a></li>
+        <li><a href="{% url 'plants_by_season' 'other' %}">Other</a></li>
     </ul>
 </body>
 </html>
