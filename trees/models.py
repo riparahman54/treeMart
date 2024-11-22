@@ -1,6 +1,8 @@
+# models.py
+
 from django.db import models
 
-# Create your models here.
+
 class Tree(models.Model):
     SEASON_CHOICES = [
         ('summer', 'Summer'),
@@ -10,12 +12,13 @@ class Tree(models.Model):
         ('other', 'Other'),
     ]
 
-
     name = models.CharField(max_length=100)
     category = models.CharField(max_length=100)
     price = models.IntegerField(default=0)
     season = models.CharField(max_length=20, choices=SEASON_CHOICES, default='other')
-    image = models.ImageField(upload_to='tree_images/', null = True, blank=True)
+    description = models.TextField(blank=True, null=True)  # Optional description field
+    care_tips = models.TextField(blank=True, null=True)  # Optional care tips field
+    image = models.ImageField(upload_to='tree_images/', null=True, blank=True)
 
     def __str__(self):
         return self.name

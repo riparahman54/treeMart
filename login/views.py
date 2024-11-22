@@ -51,7 +51,7 @@ def signin(request):
     return render(request, "signin.html")
 
 def message(request):
-    return render(request, "message.html")
+    return render(request, "homepage.html")
 
 def logout_view(request):
     return redirect('home')

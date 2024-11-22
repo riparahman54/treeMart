@@ -78,12 +78,38 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome</h1>
-        <p>You have successfully logged in!</p>
+{#    <div class="container">#}
+{#        <h1>Welcome</h1>#}
+{#        <p>You have successfully logged in!</p>#}
+{#        <a href="{% url 'tree_list' %}">Go to Tree List</a><br>#}
+{#        <a href="{% url 'plant_guide' %}">Go to Plant Guide</a><br>#}
+{#        <a href="{% url 'logout' %}">Logout</a>#}
+{#    </div>#}
+
+ <h1>Welcome, {{ user.username }}!</h1>
+
+    <!-- Profile Section -->
+    <div class="profile">
+        <h2>Your Profile</h2>
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+
+        {% if profile.profile_picture %}
+            <img src="{{ profile.profile_picture.url }}" alt="{{ user.username }}"style="width: 150px; height: 150px; border-radius: 50%;">
+        {% else %}
+            <p>No profile picture uploaded</p>
+        {% endif %}
+
+        <p><strong>Bio:</strong> {{ profile.bio }}</p>
+        <p><strong>Location:</strong> {{ profile.location }}</p>
+
+
+        <p><strong>User Type:</strong> {{ user_type }}</p>
+
         <a href="{% url 'tree_list' %}">Go to Tree List</a><br>
         <a href="{% url 'plant_guide' %}">Go to Plant Guide</a><br>
-        <a href="{% url 'logout' %}">Logout</a>
     </div>
+
+    <a href="{% url 'logout' %}">Logout</a>
 </body>
 </html>
