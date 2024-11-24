@@ -60,13 +60,54 @@ def photo_upload(request):
     return render(request, 'photo_upload.html', {'form': form})
 
 
+# Add item to cart
 def add_to_cart(request, t_id):
-    if request.method == "POST":
-        tree = get_object_or_404(Tree, pk=t_id)
-        # Add your logic for cart (e.g., save to session, or Cart model)
-        # Example:
-        cart = request.session.get('cart', [])
-        cart.append(tree.id)  # Save the tree's ID to the session
-        request.session['cart'] = cart
-        return redirect('tree_list')
+    tree = get_object_or_404(Tree, pk=t_id)
+
+    # Debugging session data to ensure the 'cart' structure is correct
+    if not isinstance(request.session.get('cart', {}), dict):
+        request.session['cart'] = {}  # Reset cart to an empty dictionary
+
+    # Retrieve the cart from the session
+    cart = request.session.get('cart', {})
+
+    # Convert t_id to a string for session storage consistency
+    t_id_str = str(t_id)
+
+    # Increment quantity if the item is already in the cart, otherwise set it to 1
+    if t_id_str in cart:
+        cart[t_id_str] += 1
+    else:
+        cart[t_id_str] = 1
+
+    # Save the updated cart back to the session
+    request.session['cart'] = cart
+
     return redirect('tree_list')
+
+def clear_cart(request):
+    request.session['cart'] = {}
+    return redirect("/")
+
+# Display cart
+def view_cart(request):
+    cart = request.session.get('cart', {})
+    items = []
+
+    for t_id, quantity in cart.items():
+        tree = Tree.objects.get(pk=int(t_id))
+        items.append({
+            'tree': tree,
+            'quantity': quantity,
+            'total_price': tree.price * quantity
+        })
+
+    return render(request, 'cart.html', {'cart_items': items})
+
+# Remove item from cart
+def remove_from_cart(request, t_id):
+    cart = request.session.get('cart', {})
+    if str(t_id) in cart:
+        del cart[str(t_id)]
+    request.session['cart'] = cart
+    return redirect('view_cart')
