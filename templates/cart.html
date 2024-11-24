@@ -1,94 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
+    <title>Your Shopping Cart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-            margin: 20px;
+            background-color: #f8f9fa; /* Light background for better readability */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
         }
-        h1 {
-            text-align: center;
-            color: #2e8b57;
-        }
-        .cart-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
-            border: 1px solid #ddd;
+
+        .container {
+            max-width: 900px;
+            background: #ffffff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
             border-radius: 8px;
             padding: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
+
+        .table th, .table td {
+            vertical-align: middle; /* Center-align text vertically */
         }
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #2e8b57;
-            color: #fff;
-        }
-        .total {
+
+        h2 {
             font-weight: bold;
+            color: #343a40;
+            margin-bottom: 20px;
         }
-        .actions a {
-            text-decoration: none;
-            color: #007bff;
+
+        .btn-sm {
+            font-size: 0.85rem;
         }
-        .actions a:hover {
-            text-decoration: underline;
+
+        .btn-success, .btn-warning, .btn-danger {
+            border-radius: 5px; /* Rounded buttons */
+        }
+
+        .text-end {
+            text-align: end;
+        }
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9rem;
         }
     </style>
 </head>
+
 <body>
-    <h1>Your Shopping Cart</h1>
-    <div class="cart-container">
-        {% if cart_items %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Subtotal</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in cart_items %}
-                        <tr>
-                            <td>{{ item.tree.name }}</td>
-                            <td>${{ item.tree.price }}</td>
-                            <td>{{ item.quantity }}</td>
-                            <td>${{ item.subtotal }}</td>
-                            <td class="actions">
-                                <a href="{% url 'remove_from_cart' item.tree.id %}">Remove</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3" class="total">Total Price:</td>
-                        <td colspan="2" class="total">${{ total_price }}</td>
-                    </tr>
-                </tfoot>
-            </table>
-        {% else %}
-            <p>Your cart is empty!</p>
-        {% endif %}
-        <div>
-            <a href="{% url 'tree_list' %}">Continue Shopping</a>
+    <div class="container mt-5">
+        <h2 class="text-center">Your Shopping Cart</h2>
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr>
+                    <td><strong>{{ item.tree.name }}</strong></td>
+                    <td>${{ item.tree.price }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>${{ item.subtotal }}</td>
+                    <td>
+                        <a href="{% url 'cart-increase' item.tree.id %}" class="btn btn-success btn-sm">+</a>
+                        <a href="{% url 'cart-decrease' item.tree.id %}" class="btn btn-warning btn-sm">-</a>
+                        <a href="{% url 'cart-remove' item.tree.id %}" class="btn btn-danger btn-sm">Remove</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center text-muted">Your cart is empty.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            {% if cart_items %}
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-end"><strong>Total Price:</strong></td>
+                    <td colspan="2" class="fw-bold">${{ total_price }}</td>
+                </tr>
+            </tfoot>
+            {% endif %}
+        </table>
+        <div class="d-flex justify-content-between">
+            <a href="{% url 'tree_list' %}" class="btn btn-primary">Continue Shopping</a>
+           
         </div>
     </div>
+    <footer>
+        &copy; {{ year }} TreeMart. All rights reserved.
+    </footer>
 </body>
+
 </html>

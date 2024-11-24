@@ -90,19 +90,40 @@ def clear_cart(request):
     return redirect("/")
 
 # Display cart
+from django.shortcuts import render, redirect
+from trees.models import Tree
+
 def view_cart(request):
     cart = request.session.get('cart', {})
     items = []
+    total_price = 0  # Initialize total price
 
     for t_id, quantity in cart.items():
         tree = Tree.objects.get(pk=int(t_id))
+        subtotal = tree.price * quantity
+        total_price += subtotal  # Calculate total price
         items.append({
             'tree': tree,
             'quantity': quantity,
-            'total_price': tree.price * quantity
+            'subtotal': subtotal
         })
 
-    return render(request, 'cart.html', {'cart_items': items})
+    return render(request, 'cart.html', {'cart_items': items, 'total_price': total_price})
+
+
+def update_cart_quantity(request, t_id, action):
+    """Update the quantity of an item in the cart."""
+    cart = request.session.get('cart', {})
+    if str(t_id) in cart:
+        if action == 'increase':
+            cart[str(t_id)] += 1
+        elif action == 'decrease' and cart[str(t_id)] > 1:
+            cart[str(t_id)] -= 1
+        elif action == 'remove':
+            del cart[str(t_id)]
+        request.session['cart'] = cart
+
+    return redirect('view_cart')
 
 # Remove item from cart
 def remove_from_cart(request, t_id):
