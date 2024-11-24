@@ -1,9 +1,117 @@
-<!-- plants_by_season.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Plants for {{ season|title }}</title>
+    <style>
+        /* General styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #D4FC79, #96E6A1);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #2d3748;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* List styles */
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        li {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        li:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        h3 {
+            margin: 0 0 1rem;
+            color: #2c5282;
+        }
+
+        p {
+            margin: 0.5rem 0;
+            color: #4a5568;
+        }
+
+        img {
+            width: 100%;
+            max-width: 200px;
+            margin-top: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Back button */
+        a {
+            margin-top: 2rem;
+            text-decoration: none;
+            font-size: 1.2rem;
+            color: #fff;
+            background: #48bb78;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            transition: background 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        a:hover {
+            background: #38a169;
+            transform: scale(1.1);
+        }
+
+        /* Keyframe animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive styling */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            ul {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <h1>Plants Suitable for {{ season|title }}</h1>
@@ -16,13 +124,13 @@
                     <p>{{ tree.description }}</p>
                     <p><strong>Care Tips:</strong> {{ tree.care_tips }}</p>
                     {% if tree.image %}
-                        <img src="{{ tree.image.url }}" alt="{{ tree.name }}" style="width: 200px;">
+                        <img src="{{ tree.image.url }}" alt="{{ tree.name }}">
                     {% endif %}
                 </li>
             {% endfor %}
         </ul>
     {% else %}
-        <p>No plants found for this season.</p>
+        <p style="font-size: 1.5rem; color: #718096;">No plants found for this season.</p>
     {% endif %}
 
     <a href="{% url 'select_season' %}">Back to season selection</a>
