@@ -6,7 +6,6 @@
     <title>Sign In</title>
     <meta name="description" content="Sign in page for accessing your account.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
     <style>
         /* Full-page styling */
         body {
@@ -15,17 +14,17 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #000;
-            color: #fff;
+            background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+            color: #333;
             font-family: Arial, sans-serif;
         }
 
         /* Form styling */
         .form-container {
-            background-color: #333;
-            padding: 20px 30px;
-            border-radius: 8px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+            background-color: #ffffff;
+            padding: 40px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             text-align: center;
             max-width: 400px;
             width: 100%;
@@ -33,52 +32,58 @@
 
         h1 {
             margin-bottom: 20px;
-            font-size: 24px;
-            color: #ffeb3b; /* Highlighted color for title */
+            font-size: 28px;
+            color: #00796b;
         }
 
         label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
-            color: #ccc;
+            color: #00796b;
+            text-align: left;
         }
 
         input[type="text"], input[type="password"] {
             width: 100%;
             padding: 10px;
-            margin-bottom: 15px;
-            border: none;
-            border-radius: 4px;
-            background-color: #555;
-            color: #fff;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            background-color: #f0f4f8;
+            color: #333;
         }
 
         input[type="text"]::placeholder,
         input[type="password"]::placeholder {
-            color: #ccc;
+            color: #777;
         }
 
         button {
-            width: 100%;
-            padding: 10px;
-            background-color: #ffeb3b;
-            color: #333;
-            border: none;
-            border-radius: 4px;
+            width: 30%;
+            padding: 12px;
+            {#padding-right: 4px;#}
+            background-color: #00796b;
+            color: #fff;
+            border: navajowhite;
+            border-radius: 20px;
             font-weight: bold;
+            font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 18px;
+            display: inline-block;
         }
 
         button:hover {
-            background-color: #ffc107;
+            background-color: #004d40;
+            transform: translateY(4px);
         }
     </style>
 </head>
 <body>
     <div class="form-container">
-        <h1>SIGN IN</h1>
+        <h1>Sign In</h1>
 
         <form action="/signin" method="post">
             {% csrf_token %}
@@ -93,7 +98,7 @@
     </div>
 
     <script src="script.js" async defer></script>
- {% if messages %}
+    {% if messages %}
         <script>
             {% for message in messages %}
                 alert("{{ message }}");

@@ -43,14 +43,14 @@ def signin(request):
 
         if user is not None:
             login(request, user)
-            return redirect('message')  # Redirect to home or another desired page
+            return redirect('homepage')  # Redirect to home or another desired page
         else:
             messages.error(request, "Bad Credentials!")
             return redirect('signin')  # Redirect back to signin on failure
 
     return render(request, "signin.html")
 
-def message(request):
+def homepage(request):
     return render(request, "homepage.html")
 
 def logout_view(request):
