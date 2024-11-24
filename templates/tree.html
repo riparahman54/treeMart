@@ -1,193 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tree Mart - Tree List</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-    <style>
-        /* General Styles */
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #f0f9ff, #e8f7f0);
-            color: #333;
-        }
-        h1 {
-            text-align: center;
-            margin: 20px 0;
-            font-size: 36px;
-            color: #2c3e50;
-        }
-
-        /* Navigation Links */
-        .action-links {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            background-color: #2c3e50;
-            padding: 10px 0;
-        }
-        .action-links a {
-            margin: 0 15px;
-            color: #fff;
-            font-size: 16px;
-            font-weight: bold;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: background 0.3s ease;
-        }
-        .action-links a:hover {
-            background-color: #f1c40f;
-            color: #2c3e50;
-        }
-
-        /* Tree Card Container */
-        .tree-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
-        }
-
-        /* Tree Card */
-        .tree-card {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            width: 300px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease;
-        }
-        .tree-card:hover {
-            transform: scale(1.05);
-        }
-
-        /* Tree Image */
-        .tree-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background-color: #f0f0f0;
-        }
-
-        /* Tree Details */
-        .tree-details {
-            padding: 15px;
-            text-align: center;
-        }
-        .tree-details h3 {
-            margin: 10px 0;
-            color: #333;
-            font-size: 20px;
-        }
-        .tree-details p {
-            margin: 5px 0;
-            color: #555;
-        }
-
-        /* Tree Actions */
-        .tree-actions {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            border-top: 1px solid #ddd;
-            padding: 10px;
-            background: #f9f9f9;
-        }
-        .tree-actions a {
-            text-decoration: none;
-            color: #3498db;
-            margin: 5px 0;
-        }
-        .tree-actions a:hover {
-            color: #2c3e50;
-            font-weight: bold;
-        }
-        .tree-actions form button {
-            padding: 8px 15px;
-            font-size: 14px;
-            font-weight: bold;
-            color: #fff;
-            background-color: #2ecc71;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        .tree-actions form button:hover {
-            background-color: #27ae60;
-        }
-
-        /* No Trees Message */
-        .no-trees {
-            text-align: center;
-            color: #666;
-            font-size: 18px;
-            margin-top: 50px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .tree-card {
-                width: 90%;
-            }
-        }
-        @media (max-width: 576px) {
-            h1 {
-                font-size: 28px;
-            }
-            .action-links a {
-                font-size: 14px;
-            }
-        }
-    </style>
+    <title>Tree List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
 </head>
-<body>
-    <h1>Here's your Treelist</h1>
-    
-    <div class="action-links">
-        <a href="{% url 'message' %}">Back to Dashboard</a>
-        <a href="{% url 'create-tree' %}">Add a New Tree</a>
-        <a href="{% url 'photo_list' %}">View All Photos</a>
-        <a href="{% url 'view_cart' %}" class="btn btn-primary">View Cart</a>
 
-    </div>
+<body style="background-color: #f9f9f9; font-family: Arial, sans-serif;">
+    <div class="container mt-5">
+        <h2 class="text-center" style="color: #333; font-weight: bold;">Here's your Treelist</h2>
 
-    {% if trees %}
-        <div class="tree-container">
-            {% for i in trees %}
-                <div class="tree-card">
-                    {% if i.image %}
-                        <img src="{{ i.image.url }}" class="tree-image" alt="{{ i.name }}">
-                    {% else %}
-                        <img src="{% static 'images/placeholder.png' %}" class="tree-image" alt="No Image Available">
-                    {% endif %}
-                    <div class="tree-details">
-                        <h3>{{ i.name }}</h3>
-                        <p>Category: {{ i.category }}</p>
-                        <p>Price: ${{ i.price }}</p>
-                    </div>
-                    <div class="tree-actions">
-                        <a href="{% url 'update-tree' i.id %}">Update</a>
-                        <a href="{% url 'delete-tree' i.id %}">Delete</a>
-                        <form action="{% url 'add-to-cart' i.id %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit">Add to Cart</button>
-                        </form>
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-lg" style="background-color: #343a40; margin-bottom: 20px;">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white" href="{% url 'message' %}" style="font-weight: bold;">TreeMart</a>
+                <div class="navbar-nav">
+                    <a class="nav-link text-white" href="{% url 'message' %}" style="margin-right: 15px;">Back to Dashboard</a>
+                    <a class="nav-link text-white" href="{% url 'create-tree' %}" style="margin-right: 15px;">Add a New Tree</a>
+                    <a class="nav-link text-white" href="{% url 'tree_list' %}" style="margin-right: 15px;">View All Photos</a>
+                    <a class="nav-link text-white" href="{% url 'view_cart' %}">View Cart</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Search Form -->
+        <form method="GET" action="{% url 'tree_list' %}" style="margin-bottom: 20px;">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search trees..." value="{{ request.GET.q }}" 
+                    style="border: 2px solid #6c757d; border-right: none; padding: 10px;">
+                <button class="btn btn-primary" type="submit" style="border: 2px solid #6c757d; background-color: #343a40;">Search</button>
+            </div>
+        </form>
+
+        <!-- Tree Cards -->
+        <div class="row">
+            {% for tree in trees %}
+            <div class="col-md-4 mb-4">
+                <div class="card" style="box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: none;">
+                    <img src="{{ tree.image.url }}" class="card-img-top" alt="{{ tree.name }}" style="height: 200px; object-fit: cover;">
+                    <div class="card-body" style="text-align: center;">
+                        <h5 class="card-title" style="color: #333; font-weight: bold;">{{ tree.name }}</h5>
+                        <p class="card-text" style="color: #777; font-size: 14px;">
+                            Category: {{ tree.category }} <br>
+                            Price: ${{ tree.price }}
+                        </p>
+                        <div class="d-flex justify-content-between" style="margin-bottom: 10px;">
+                            <a href="{% url 'update-tree' tree.id %}" class="btn btn-outline-secondary btn-sm">Update</a>
+                            <a href="{% url 'delete-tree' tree.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+                        </div>
+                        <a href="{% url 'add-to-cart' tree.id %}" class="btn btn-success btn-sm">Add to Cart</a>
                     </div>
                 </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <p class="text-center text-muted" style="font-size: 16px;">No trees found.</p>
+            </div>
             {% endfor %}
         </div>
-    {% else %}
-        <div class="no-trees">
-            <p>No trees available to display.</p>
-        </div>
-    {% endif %}
+    </div>
 </body>
+
 </html>

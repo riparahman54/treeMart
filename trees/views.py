@@ -41,8 +41,16 @@ def delete_tree(request,t_id):
 
 
 def tree_list(request):
-    trees = Tree.objects.all()
-    return render(request, 'tree.html', {'trees': trees})
+    query = request.GET.get('q', '')  # Get the search query from the request
+    if query:
+        trees = Tree.objects.filter(name__icontains=query)  # Filter trees by name
+    else:
+        trees = Tree.objects.all()  # If no query, show all trees
+    context = {
+        'trees': trees,
+        'query': query,
+    }
+    return render(request, 'tree.html', context)
 
 
 def photo_list(request):
