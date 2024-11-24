@@ -1,18 +1,84 @@
-<!-- select_season.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Select Season</title>
+    <style>
+        /* General styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #FFDEE9, #B5FFFC);
+            color: #333;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem; /* Adds spacing between buttons */
+        }
+
+        li {
+            text-align: center;
+        }
+
+        /* Button styles */
+        a {
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: inline-block;
+            padding: 1rem 2rem;
+            color: #fff;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease-in-out, transform 0.3s ease;
+            transform: perspective(1px) translateZ(0);
+        }
+
+        a:hover {
+            transform: scale(1.1) translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #2575fc, #6a11cb);
+        }
+
+        /* Keyframes for animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Select a Season</h1>
-    <ul>
-        <li><a href="{% url 'plants_by_season' 'summer' %}">Summer</a></li>
-        <li><a href="{% url 'plants_by_season' 'winter' %}">Winter</a></li>
-        <li><a href="{% url 'plants_by_season' 'spring' %}">Spring</a></li>
-        <li><a href="{% url 'plants_by_season' 'autumn' %}">Autumn</a></li>
-        <li><a href="{% url 'plants_by_season' 'other' %}">Other</a></li>
-    </ul>
+    <div>
+        <h1>Select a Season</h1>
+        <ul>
+            <li><a href="{% url 'plants_by_season' 'summer' %}">Summer</a></li>
+            <li><a href="{% url 'plants_by_season' 'winter' %}">Winter</a></li>
+            <li><a href="{% url 'plants_by_season' 'spring' %}">Spring</a></li>
+            <li><a href="{% url 'plants_by_season' 'autumn' %}">Autumn</a></li>
+            <li><a href="{% url 'plants_by_season' 'other' %}">Other</a></li>
+        </ul>
+    </div>
 </body>
 </html>
