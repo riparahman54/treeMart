@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Select Season</title>
+    <title>Select a Season</title>
     <style>
         /* General styles */
         body {
@@ -9,76 +9,75 @@
             padding: 0;
             font-family: Arial, sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             background: linear-gradient(135deg, #FFDEE9, #B5FFFC);
             color: #333;
-            overflow: hidden;
         }
 
         h1 {
             font-size: 2.5rem;
-            text-align: center;
             margin-bottom: 2rem;
-            animation: fadeIn 1s ease-in-out;
+            text-align: center;
         }
 
         ul {
             list-style: none;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem; /* Adds spacing between buttons */
+            margin: 0;
         }
 
         li {
             text-align: center;
+            margin-bottom: 1rem;
         }
 
         /* Button styles */
         a {
+            display: inline-block;
             text-decoration: none;
             font-size: 1.5rem;
             font-weight: bold;
-            display: inline-block;
-            padding: 1rem 2rem;
             color: #fff;
             background: linear-gradient(135deg, #6a11cb, #2575fc);
-            border: none;
-            border-radius: 10px;
+            padding: 1rem 2rem;
+            border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.4s ease-in-out, transform 0.3s ease;
-            transform: perspective(1px) translateZ(0);
+            transition: all 0.3s ease;
         }
 
         a:hover {
-            transform: scale(1.1) translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
             background: linear-gradient(135deg, #2575fc, #6a11cb);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
 
-        /* Keyframes for animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        /* Back to Homepage button */
+        .back-home {
+            margin-top: 2rem;
+            font-size: 1.2rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #FF6A6A, #FF8E53);
+            border-radius: 8px;
+        }
+
+        .back-home:hover {
+            background: linear-gradient(135deg, #FF8E53, #FF6A6A);
         }
     </style>
 </head>
 <body>
-    <div>
-        <h1>Select a Season</h1>
-        <ul>
-            <li><a href="{% url 'plants_by_season' 'summer' %}">Summer</a></li>
-            <li><a href="{% url 'plants_by_season' 'winter' %}">Winter</a></li>
-            <li><a href="{% url 'plants_by_season' 'spring' %}">Spring</a></li>
-            <li><a href="{% url 'plants_by_season' 'autumn' %}">Autumn</a></li>
-            <li><a href="{% url 'plants_by_season' 'other' %}">Other</a></li>
-        </ul>
-    </div>
+    <h1>Select a Season</h1>
+    <ul>
+        <li><a href="{% url 'plants_by_season' 'summer' %}">Summer</a></li>
+        <li><a href="{% url 'plants_by_season' 'winter' %}">Winter</a></li>
+        <li><a href="{% url 'plants_by_season' 'spring' %}">Spring</a></li>
+        <li><a href="{% url 'plants_by_season' 'autumn' %}">Autumn</a></li>
+        <li><a href="{% url 'plants_by_season' 'other' %}">Other</a></li>
+    </ul>
+    <!-- Back to Homepage Button -->
+    <a href="{% url 'message' %}" class="back-home">Back to Homepage</a>
 </body>
 </html>
