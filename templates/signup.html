@@ -9,8 +9,8 @@
     <style>
         /* General body styling */
         body {
-            background-color: #000;
-            color: #fff;
+            background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+            color: #333;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -24,14 +24,15 @@
         h1 {
             font-size: 2.5em;
             margin-bottom: 20px;
+            color: #00796b;
         }
 
         /* Form styling */
         form {
-            background-color: #222;
-            padding: 20px 40px;
+            background-color: #ffffff;
+            padding: 30px 40px;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             max-width: 400px;
             width: 100%;
         }
@@ -40,6 +41,7 @@
             font-size: 1.1em;
             margin-top: 15px;
             display: block;
+            color: #00796b;
         }
 
         input[type="text"],
@@ -49,9 +51,9 @@
             padding: 10px;
             margin-top: 8px;
             margin-bottom: 15px;
-            background-color: #333;
-            color: #fff;
-            border: 1px solid #444;
+            background-color: #f0f4f8;
+            color: #333;
+            border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 1em;
         }
@@ -60,23 +62,24 @@
         button {
             width: 100%;
             padding: 12px;
-            background-color: #0056b3;
+            background-color: #00796b;
             color: #fff;
             border: none;
             border-radius: 5px;
             font-size: 1.2em;
             font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         button:hover {
-            background-color: #0073e6;
+            background-color: #004d40;
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
-    <h1>SIGN UP</h1>
+    <h1>Sign Up</h1>
 
     <form action="/signup" method="post">
         {% csrf_token %}
