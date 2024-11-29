@@ -1,9 +1,10 @@
 from django.db import models
 
+from trees.models import Tree
+
+
 # Create your models here.
 
-class Plant(models.Model):
-    name = models.CharField(max_length=100)
-    def __str__(self):
-        return self.name
+class Plant(Tree):
+    pass
 

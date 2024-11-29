@@ -39,3 +39,9 @@ class Cart(models.Model):
 
     class Meta:
         unique_together = ('user', 'tree')
+
+
+class Rating(models.Model):
+    tree = models.ForeignKey(Tree, on_delete=models.CASCADE, related_name='ratings')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.IntegerField()
