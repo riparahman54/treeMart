@@ -1,14 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Confirmation</title>
+    <style>
+        body {
+            background-color: #e3fdfd; /* Light sea green */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .confirmation-container {
+            max-width: 600px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .icon {
+            font-size: 60px;
+            color: #2ec4b6; /* Sea green */
+            margin-bottom: 15px;
+        }
+
+        .confirmation-title {
+            font-size: 1.8rem;
+            color: #0077b6; /* Blue */
+            margin-bottom: 10px;
+        }
+
+        .confirmation-text {
+            font-size: 1rem;
+            color: #4f4f4f;
+            margin-bottom: 25px;
+        }
+
+        .order-details {
+            background-color: #f0f7f7; /* Light blue-gray */
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .order-details p {
+            margin: 5px 0;
+            font-size: 1rem;
+            color: #0077b6; /* Blue */
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #2ec4b6; /* Sea green */
+            color: #ffffff;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .btn:hover {
+            background-color: #0077b6; /* Blue on hover */
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Thank you for your order!</h1>
-    <p>Your order has been successfully placed. Your order ID is {{ order.id }}.</p>
-    <p>Total price: ${{ order.total_price }}</p>
-    <a href="{% url 'tree_list' %}">Continue Shopping</a>
+    <div class="confirmation-container">
+        <div class="icon">✔</div>
+        <h1 class="confirmation-title">Thank You for Your Order!</h1>
+        <p class="confirmation-text">Your order has been successfully placed. You’ll receive updates shortly.</p>
+
+        <div class="order-details">
+            <p><strong>Order ID:</strong> {{ order.id }}</p>
+            <p><strong>Total Price:</strong> ${{ order.total_price }}</p>
+        </div>
+
+        <a href="{% url 'tree_list' %}" class="btn">Continue Shopping</a>
+    </div>
+
+    <footer>
+        &copy; {{ year }} TreeMart. Designed for tree lovers.
+    </footer>
 </body>
+
 </html>
