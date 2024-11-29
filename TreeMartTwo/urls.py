@@ -27,7 +27,7 @@ urlpatterns = [
     path('trees/', include('trees.urls')),
     path('accounts/', include('accounts.urls')),
     path('plant_guide/', include('plant_guide.urls')),
-
+    path('orders/', include('orders.urls')),
 
 ]
 if settings.DEBUG:
