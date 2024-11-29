@@ -6,6 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tree List</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <script>
+        function rateTree(treeId, ratingValue) {
+            fetch('/rate-tree/', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ tree_id: treeId, rating: ratingValue }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(`Thank you! New average rating: ${data.average_rating}`);
+                    document.getElementById(`average-rating-${treeId}`).textContent = data.average_rating;
+                } else {
+                    alert(data.error);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
 </head>
 
 <body style="background-color: #f9f9f9; font-family: Arial, sans-serif;">
@@ -28,7 +50,7 @@
         <!-- Search Form -->
         <form method="GET" action="{% url 'tree_list' %}" style="margin-bottom: 20px;">
             <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search trees..." value="{{ request.GET.q }}" 
+                <input type="text" name="q" class="form-control" placeholder="Search trees..." value="{{ request.GET.q }}"
                     style="border: 2px solid #6c757d; border-right: none; padding: 10px;">
                 <button class="btn btn-primary" type="submit" style="border: 2px solid #6c757d; background-color: #343a40;">Search</button>
             </div>
@@ -46,11 +68,33 @@
                             Category: {{ tree.category }} <br>
                             Price: ${{ tree.price }}
                         </p>
-                        <div class="d-flex justify-content-between" style="margin-bottom: 10px;">
+
+                        <!-- Star Rating Display -->
+                        <p class="mb-2">
+                            Average Rating:
+                            <span id="average-rating-{{ tree.id }}" style="font-weight: bold; color: #007bff;">
+                                {{ tree.average_rating }}
+                            </span>
+                            ⭐
+                        </p>
+
+                        <!-- Star Rating Interaction -->
+                        <div>
+                            {% for star in "12345" %}
+                                <button
+                                    class="btn btn-outline-warning btn-sm"
+                                    onclick="rateTree({{ tree.id }}, {{ forloop.counter }})">
+                                    {{ forloop.counter }} ⭐
+                                </button>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex justify-content-between mt-3">
                             <a href="{% url 'update-tree' tree.id %}" class="btn btn-outline-secondary btn-sm">Update</a>
                             <a href="{% url 'delete-tree' tree.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
                         </div>
-                        <a href="{% url 'add-to-cart' tree.id %}" class="btn btn-success btn-sm">Add to Cart</a>
+                        <a href="{% url 'add-to-cart' tree.id %}" class="btn btn-success btn-sm mt-2">Add to Cart</a>
                     </div>
                 </div>
             </div>
