@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
-from trees.models import Tree
+from django.http import HttpResponse, JsonResponse
+from trees.models import Tree, Rating
 from trees.forms import TreeForm
 
 # Create your views here.
@@ -140,3 +140,36 @@ def remove_from_cart(request, t_id):
         del cart[str(t_id)]
     request.session['cart'] = cart
     return redirect('view_cart')
+
+
+
+def rate_tree(request):
+    """Allow a user to rate or update their rating for a tree."""
+    if request.method == 'POST' and request.user.is_authenticated:
+        tree_id = request.POST.get('tree_id')
+        rating_value = int(request.POST.get('rating'))
+
+        if not (1 <= rating_value <= 5):
+            return JsonResponse({'success': False, 'error': 'Invalid rating value.'})
+
+        tree = get_object_or_404(Tree, id=tree_id)
+
+        # Check if the user already rated this tree
+        rating, created = Rating.objects.get_or_create(user=request.user, tree=tree)
+        if not created:
+            # Update total_rating by subtracting the old rating first
+            tree.total_rating -= rating.rating
+        tree.total_rating += rating_value
+        rating.rating = rating_value
+        rating.save()
+
+        # Update the number of ratings and save the tree
+        tree.num_ratings = tree.ratings.count()
+        tree.save()
+
+        return JsonResponse({
+            'success': True,
+            'average_rating': tree.average_rating
+        })
+
+    return JsonResponse({'success': False, 'error': 'Invalid request method or user not authenticated.'})

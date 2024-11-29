@@ -38,6 +38,7 @@ urlpatterns = [
     path('cart/decrease/<int:t_id>/', views.update_cart_quantity, {'action': 'decrease'}, name='cart-decrease'),
     path('cart/remove/<int:t_id>/', views.update_cart_quantity, {'action': 'remove'}, name='cart-remove'),
     path('', views.tree_list, name='tree_list'),  # Tree list page
+    path('rate-tree/', views.rate_tree, name='rate_tree'),
 
 
 ]
