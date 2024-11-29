@@ -92,11 +92,16 @@
             </tfoot>
             {% endif %}
         </table>
+        
+        <!-- "Order Now" Button -->
+        {% if cart_items %}
         <div class="d-flex justify-content-between">
             <a href="{% url 'tree_list' %}" class="btn btn-primary">Continue Shopping</a>
-           
+            <a href="{% url 'place_order' %}" class="btn btn-success">Order Now</a> <!-- Added the "Order Now" button -->
         </div>
+        {% endif %}
     </div>
+
     <footer>
         &copy; {{ year }} TreeMart. All rights reserved.
     </footer>
