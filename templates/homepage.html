@@ -26,18 +26,18 @@
 
         /* Navbar Styles */
         .navbar {
-            background-color: rgb(102, 154, 159);
+            background-color: rgb(61, 112, 110);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7);
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
-            padding: 15px 0;
+            padding: 10px 0;
         }
 
         .navbar-brand {
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             font-weight: bold;
             color: #fff;
             text-transform: uppercase;
@@ -52,7 +52,7 @@
         }
 
         .navbar-nav .nav-link:hover {
-            color: #0c1d22 !important;
+            color: #163945 !important;
             background-color: rgba(0, 0, 0, 0.1);
             border-radius: 5px;
         }
@@ -64,7 +64,7 @@
             background-image: url('media/images/istockphoto-470649314-612x612.jpg');
             background-size: cover;
             background-position: center;
-            margin-top: 80px;
+            margin-top: 20px;
             position: relative;
             display: flex;
             align-items: center;
@@ -87,18 +87,19 @@
         .hero-text {
             position: relative;
             max-width: 90%;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow for better visibility */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Stronger text shadow for better visibility */
+            margin-top: 50px; /* Added space from top */
         }
 
         .hero-text h1 {
             font-size: 3.5rem; /* Increase font size */
             font-weight: 700;
             margin-bottom: 20px;
-            color: #fff;
+            color: #fafafa;
         }
 
         .hero-text .btn {
-            background-color: #0f2533;
+            background-color: #10212c;
             color: #fff;
             padding: 15px 30px;
             font-size: 1.5rem;
@@ -108,38 +109,78 @@
         }
 
         .hero-text .btn:hover {
-            background-color: rgba(16, 41, 43, 0.84);
+            background-color: rgba(37, 44, 46, 0.84);
         }
 
-        /* Recently Added Trees Section */
-        .recent-trees h2 {
-            color: #2b686c;
+        /* Search Bar */
+        .search-bar button {
+            background-color: #343a40; /* Button background color */
+            color: #fff; /* Button text color */
+            padding: 9px 9px; /* Adjust padding for better alignment */
+            font-size: 1.1rem; /* Font size for the button text */
+            border: none;
+            border-radius: 0px;
+            transition: background-color 0.3s;
+        }
+
+        .search-bar button:hover {
+            background-color: rgba(10, 75, 81, 0.84); /* Slightly darker shade for hover effect */
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: #10212c;
+            color: #fff;
+            padding: 20px 0;
             text-align: center;
             margin-top: 50px;
         }
 
-        .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .footer a {
+            color: #82d5f3;
+            text-decoration: none;
         }
 
-        .card-img-top {
-            height: 200px;
-            object-fit: cover;
+        .footer a:hover {
+            color: #fafafa;
+            text-decoration: underline;
         }
 
+        /* Section Styles */
+        .section {
+            padding: 60px 0;
+        }
 
-    .search-bar button {
-        background-color: #0f2533; /* Button background color */
-        color: #fff; /* Button text color */
-        padding: 8px 20px; /* Adjust padding for better alignment */
-        font-size: 1.1rem; /* Font size for the button text */
-        border: none;
-        border-radius: 2px;
-        transition: background-color 0.3s;
-    }
+        .section-title {
+            font-size: 2.5rem;
+            color: #285a6a;
+            text-align: center;
+            margin-bottom: 40px;
+        }
 
-    .search-bar button:hover {
-        background-color: rgba(16, 41, 43, 0.84); /* Slightly darker shade for hover effect */
+        .section-content {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-button {
+            background-color: #10212c;
+            color: #fff;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background-color: rgba(37, 44, 46, 0.84);
+        }
 
     </style>
 </head>
@@ -148,7 +189,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'view_profile' %}">TreeMart</a>
+            <a class="navbar-brand" href="{% url 'homepage' %}">TreeMart</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -183,32 +224,18 @@
     <div class="hero">
         <div class="hero-text">
             <h1 style="color: #fafafa; text-shadow: 6px 8px 9px rgb(12,29,34);">A place to discover plants and buy, sell, and care tips</h1><br>
-            <a href="{% url 'tree_list' %}" class="btn">Order Now!</a>
+
         </div>
     </div>
 
-    <!-- Recently Added Trees Section -->
-    <section class="container recent-trees">
-        <h2>Recently Added Trees</h2>
-        <div class="row">
-            {% for tree in recent_trees %}
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="{{ tree.image.url }}" class="card-img-top" alt="{{ tree.name }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ tree.name }}</h5>
-                            <p class="card-text">{{ tree.description|truncatewords:20 }}</p>
-                            <a href="{% url 'tree_detail' tree.id %}" class="btn btn-primary">View Details</a>
-                        </div>
-                    </div>
-                </div>
-            {% empty %}
-                <p class="text-center">No recently added trees available.</p>
-            {% endfor %}
+    <!-- Main Content Section -->
+    <section class="section">
+        <h2 class="section-title">Welcome to TreeMart</h2>
+        <div class="section-content">
+            <p>TreeMart is your one-stop platform for discovering, buying, and selling trees. Connect with enthusiasts, gardeners, and nurseries effortlessly. Join us and explore a world of green possibilities!</p>
+            <a href="{% url 'tree_list' %}" class="cta-button">Explore Trees</a>
         </div>
     </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-</body>
-</html>
+    <!-- Footer -->
+    <footer class="footer">

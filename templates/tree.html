@@ -31,30 +31,36 @@
 </head>
 
 <body style="background-color: #f9f9f9; font-family: Arial, sans-serif;">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #3d706e; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7);">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'homepage' %}" style="font-weight: bold; text-transform: uppercase;">TreeMart</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'homepage' %}">BACK TO HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'create-tree' %}">ADD NEW TREE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'view_cart' %}">VIEW CART</a>
+                    </li>
+                </ul>
+                <form method="GET" action="{% url 'tree_list' %}" class="d-flex ms-3 search-bar">
+                    <input type="text" name="q" class="form-control" placeholder="Search trees..." value="{{ request.GET.q }}" style="border: 2px solid #6c757d; border-right: none; padding: 10px;">
+                    <button class="btn btn-primary" type="submit" style="border: 0px solid #6c757d; background-color: #343a40;">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
     <div class="container mt-5">
         <h2 class="text-center" style="color: #333; font-weight: bold;">Here's your Treelist</h2>
-
-        <!-- Navigation Bar -->
-        <nav class="navbar navbar-expand-lg" style="background-color: #343a40; margin-bottom: 20px;">
-            <div class="container-fluid">
-                <a class="navbar-brand text-white" href="{% url 'homepage' %}" style="font-weight: bold;">TreeMart</a>
-                <div class="navbar-nav">
-                    <a class="nav-link text-white" href="{% url 'homepage' %}" style="margin-right: 15px;">Back to Dashboard</a>
-                    <a class="nav-link text-white" href="{% url 'create-tree' %}" style="margin-right: 15px;">Add a New Tree</a>
-{#                    <a class="nav-link text-white" href="{% url 'tree_list' %}" style="margin-right: 15px;">View All Photos</a>#}
-                  <a class="nav-link text-white" href="{% url 'view_cart' %}">View Cart</a>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Search Form -->
-        <form method="GET" action="{% url 'tree_list' %}" style="margin-bottom: 20px;">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search trees..." value="{{ request.GET.q }}"
-                    style="border: 2px solid #6c757d; border-right: none; padding: 10px;">
-                <button class="btn btn-primary" type="submit" style="border: 2px solid #6c757d; background-color: #343a40;">Search</button>
-            </div>
-        </form>
 
         <!-- Tree Cards -->
         <div class="row">
@@ -105,6 +111,8 @@
             {% endfor %}
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>
