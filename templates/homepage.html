@@ -195,9 +195,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'tree_list' %}">Tree List</a>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'plant_guide' %}">Plant Guide</a>
                     </li>
@@ -223,7 +221,7 @@
     <!-- Hero Image Section with Text Overlay -->
     <div class="hero">
         <div class="hero-text">
-            <h1 style="color: #fafafa; text-shadow: 6px 8px 9px rgb(12,29,34);">A place to discover plants and buy, sell, and care tips</h1><br>
+            <h1 style="color: #a9aaaa; text-shadow: 6px 8px 9px rgb(12,29,34);">A place to discover plants and buy, sell, and care tips</h1><br>
 
         </div>
     </div>
@@ -238,4 +236,6 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer>
+        &copy; {{ year }} TreeMart. All rights reserved.
+    </footer>

@@ -6,5 +6,5 @@ from trees.models import Tree
 # Create your models here.
 
 class Plant(Tree):
-    pass
+    dummy_field = models.CharField(max_length=100, null=True, blank=True)
 
