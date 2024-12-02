@@ -141,57 +141,44 @@ def view_profile(request):
 
 
 
-
 @login_required
-
 def edit_profile(request):
-
     try:
-
         profile = Profile.objects.get(user=request.user)
-
     except ObjectDoesNotExist:
-
-        profile = None  # If no profile exists, we create a new one
-
-
+        profile = Profile.objects.create(user=request.user)  # Create a new profile if it doesn't exist
 
     if request.method == 'POST':
+        # Get user fields
+        username = request.POST.get('username')
+        email = request.POST.get('email')
 
+        # Update user fields
+        user = request.user
+        if username:
+            user.username = username
+        if email:
+            user.email = email
+        user.save()
+
+        # Get profile fields
         bio = request.POST.get('bio')
-
         location = request.POST.get('location')
-
         profile_picture = request.FILES.get('profile_picture')
 
-
-
-        # If the user uploaded a new profile picture, update it
-
+        # Update profile fields
+        if bio is not None:
+            profile.bio = bio
+        if location is not None:
+            profile.location = location
         if profile_picture:
-
             profile.profile_picture = profile_picture
-
-
-
-        # Update other fields
-
-        profile.bio = bio
-
-        profile.location = location
-
         profile.save()
 
-
-
         messages.success(request, "Your profile has been updated successfully.")
-
         return redirect('view_profile')  # Redirect to view profile after editing
 
-
-
     return render(request, 'edit_profile.html', {'profile': profile, 'user': request.user})
-
 
 
 @login_required
