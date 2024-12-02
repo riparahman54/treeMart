@@ -55,13 +55,17 @@ class Profile(models.Model):
 
         return self.user_type == 'seller'
 
-
+    def is_buyer(self):
+        return self.user_type == 'buyer'
 
     # Method to check if the user is an admin
 
     def is_admin(self):
 
         return self.user_type == 'admin'
+
+
+
 
 
 

@@ -4,256 +4,171 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TreeMart - Discover, Buy & Sell Trees</title>
-    <meta name="google-site-verification" content="H0wyCCkisvOubHqwKjsAxmZU3pfjwGUUOycVNbf-QNk">
     <meta name="description" content="The best marketplace for trees. Buy & sell trees with ease at TreeMart.">
     <!-- Include Bootstrap and Fonts -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" as="font" type="font/woff2" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* Body Styling */
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f4f4f4;
+            background-color: #f5f5f5;
             color: #333;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
+            min-height: 100vh;
         }
-
-        /* Navbar Styles */
         .navbar {
-            background-color: rgb(43, 104, 108);
-            box-shadow: 0 8px 6px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 8px 0;
+            background-color: #2b686c;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
         }
-
         .navbar-brand {
-            font-size: 1.75rem;
+            font-size: 1.8rem;
             font-weight: bold;
             color: #fff;
-            text-transform: uppercase;
         }
-
-        .navbar-nav .nav-link {
+        .nav-link {
             color: #fff !important;
-            font-size: 1.1rem;
-            font-weight: 500;
             text-transform: uppercase;
-            transition: color 0.3s ease, background-color 0.3s ease;
+            font-size: 1rem;
         }
-
-        .navbar-nav .nav-link:hover {
-            color: #0c1d22 !important;
-            background-color: rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
+        .nav-link:hover, .nav-link.active {
+            color: #d9f7ff !important;
         }
-
-        /* Hero Image */
         .hero {
-            width: 100%;
-            height: 750px;
-            background-image: url('media/images/istockphoto-470649314-612x612.jpg');
-            background-size: cover;
-            background-position: center;
-            margin-top: 60px;
-            position: relative;
+            height: 80vh;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)),
+                        url('media/images/istockphoto-470649314-612x612.jpg') center/cover no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: inherit;
-            filter: blur(8px); /* Apply blur effect to the background image */
-            z-index: -1;
-        }
-
-        .hero-text {
-            position: relative;
-            max-width: 90%;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow for better visibility */
-        }
-
-        .hero-text h1 {
-            font-size: 3.5rem; /* Increase font size */
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #bfe1ff;
-        }
-
-        .hero-text .btn {
-            background-color: #fbffff;
-            color: #ffffff;
-            padding: 9px 9px;
-            font-size: 1.0rem;
-            border: none;
-            border-radius: 0px;
-            transition: background-color 0.3s;
-        }
-
-        .hero-text .btn:hover {
-            background-color: rgba(16, 41, 43, 0.84);
-        }
-
-        /* Recently Added Trees Section */
-        .recent-trees h2 {
-            color: #2b686c;
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-img-top {
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .search-bar button {
-            background-color: #0f2533; /* Button background color */
-            color: #fff; /* Button text color */
-            padding: 9px 9px; /* Adjust padding for better alignment */
-            font-size: 1.1rem; /* Font size for the button text */
-            border: none;
-            border-radius: 2px;
-            transition: background-color 0.3s;
-        }
-
-        .search-bar button:hover {
-            background-color: rgba(16, 41, 43, 0.84); /* Slightly darker shade for hover effect */
-        }
-
-        /* Section Styling */
-        .section {
-            max-width: 1200px;
-            margin: 60px 20px;
-            padding: 40px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            color: #2b686c;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .section-content {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            text-align: center;
-            color: #666;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background-color: #20455e;
             color: #fff;
-            padding: 15px 30px;
-            font-size: 1.3rem;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+        .cta-button {
+            margin-top: 1rem;
+            padding: 0.75rem 2rem;
+            background-color: #fff;
+            color: #2b686c;
+            font-weight: bold;
             border-radius: 5px;
             text-decoration: none;
-            transition: background-color 0.3s;
+            transition: 0.3s ease-in-out;
         }
-
         .cta-button:hover {
-            background-color: rgba(16, 41, 43, 0.84);
+            background-color: #2b686c;
+            color: #fff;
         }
-
-        /* Responsive Layout */
-        @media (max-width: 768px) {
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .section-content {
-                font-size: 1rem;
-            }
-
-            .cta-button {
-                font-size: 1.1rem;
-                padding: 12px 24px;
-            }
+        .tree-section {
+            padding: 2rem 1rem;
+        }
+        .tree-card {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .tree-card:hover {
+            transform: scale(1.05);
+        }
+        .tree-card img {
+            width: 100%;
+            height: auto;
+        }
+        .tree-card .card-body {
+            padding: 1rem;
+        }
+        .footer {
+            background-color: #2b686c;
+            color: #fff;
+            padding: 1.5rem 0;
+            text-align: center;
+        }
+        .footer a {
+            color: #d9f7ff;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'view_profile' %}">TreeMart</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'plant_guide' %}">Plant Guide</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'tree_list' %}">Tree List</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'plant_guide' %}">Plant Guide</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Profile
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">Profile</a>
+                        <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{% url 'view_profile' %}">View Profile</a></li>
                             <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Profile</a></li>
                             <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
-                <form method="GET" action="{% url 'tree_list' %}" class="d-flex ms-3 search-bar">
+                <form method="GET" action="{% url 'tree_list' %}" class="d-flex ms-3">
                     <input type="text" name="q" class="form-control" placeholder="Search trees..." value="{{ request.GET.q }}">
-                    <button class="btn" type="submit">Search</button>
+                    <button class="btn btn-light ms-2" type="submit">Search</button>
                 </form>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Image Section with Text Overlay -->
+    <!-- Hero Section -->
     <div class="hero">
         <div class="hero-text">
-            <h1>A place to discover plants and buy, sell, and care tips</h1>
+            <h1>A Place to Discover, Buy, and Sell Trees</h1>
+            <br>
+            <a href="{% url 'tree_list' %}" class="cta-button">Explore Trees</a>
         </div>
     </div>
 
-    <!-- Welcome Section -->
-    <section class="section">
-        <h2 class="section-title">Welcome to TreeMart</h2>
-        <div class="section-content">
-            <p>TreeMart is your one-stop platform for discovering, buying, and selling trees. Connect with enthusiasts, gardeners, and nurseries effortlessly. Join us and explore a world of green possibilities!</p>
-            <a href="{% url 'tree_list' %}" class="cta-button">Explore Trees</a>
+    <!-- Tree Cards Section -->
+    <div class="container tree-section">
+        <div class="row">
+            {% for tree in most_rated_trees %}
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="card tree-card">
+                    <img src="{{ tree.image.url }}" alt="{{ tree.name }}">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ tree.name }}</h5>
+                        <p class="card-text">Rating: {{ tree.annotated_average_rating|floatformat:2 }} ({{ tree.num_ratings }} ratings)</p>
+                        <p class="card-text">Price: ${{ tree.price }}</p>
+                        <a href="{% url 'tree_list' %}" class="btn btn-success">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
-    </section>
+    </div>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 TreeMart. All rights reserved. </p>
+        <p>
+{#            <a href="#"><i class="fab fa-facebook-f me-3"></i></a>#}
+{#            <a href="#"><i class="fab fa-twitter me-3"></i></a>#}
+{#            <a href="#"><i class="fab fa-instagram"></i></a>#}
+        </p>
+    </footer>
+
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-    <footer>
-        &copy;  TreeMart. All rights reserved.
-    </footer>
 </body>
 </html>

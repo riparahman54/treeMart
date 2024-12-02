@@ -5,6 +5,10 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 
 from django.contrib.auth import logout
+
+from trees.models import Tree
+from django.db.models import F, FloatField, ExpressionWrapper
+
 def home(request):
     return render(request, "index.html")
 
@@ -51,7 +55,13 @@ def signin(request):
     return render(request, "signin.html")
 
 def homepage(request):
-    return render(request, "homepage.html")
+    most_rated_trees = Tree.objects.annotate(
+        annotated_average_rating=ExpressionWrapper(
+            F('total_rating') / F('num_ratings'),
+            output_field=FloatField()
+        )
+    ).filter(num_ratings__gt=0).order_by('-annotated_average_rating')[:6]
+    return render(request, 'homepage.html', {'most_rated_trees': most_rated_trees})
 
 def logout_view(request):
     return redirect('home')
