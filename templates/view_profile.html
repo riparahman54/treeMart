@@ -90,19 +90,62 @@
             color: #b2ebf2;
             margin-top: 15px;
         }
+
+        .navbar {
+            background-color: #2b686c;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+        .nav-link {
+            color: #fff !important;
+            text-transform: uppercase;
+            font-size: 1rem;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #d9f7ff !important;
+        }
     </style>
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'view_profile' %}">TreeMart</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'tree_list' %}">Tree List</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'plant_guide' %}">Plant Guide</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">Profile</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'view_profile' %}">View Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form method="GET" action="{% url 'tree_list' %}" class="d-flex ms-3">
+                    <input type="text" name="q" class="form-control" placeholder="Search trees..." value="{{ request.GET.q }}">
+                    <button class="btn btn-light ms-2" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
         <div class="profile-container">
-            <!-- Profile Header -->
             <div class="profile-header">
                 <h1>Welcome, {{ user.username }}!</h1>
                 <p>Your profile details are below.</p>
             </div>
 
-            <!-- Profile Info -->
             <div class="profile-info">
                 {% if profile.profile_picture %}
                     <img src="{{ profile.profile_picture.url }}" alt="{{ user.username }}">
@@ -116,7 +159,6 @@
                 <p><strong>Location:</strong> {{ profile.location }}</p>
                 <p><strong>User Type:</strong> {{ profile.get_user_type_display }}</p>
 
-                <!-- Edit Profile and Logout Buttons -->
                 <div>
                     <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Profile</a>
                     <a href="{% url 'logout' %}" class="btn logout-btn">Logout</a>
@@ -124,6 +166,9 @@
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>

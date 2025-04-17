@@ -9,8 +9,42 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f8f9fa; /* Light background for readability */
+            background-color: #f8f9fa;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #2b686c, #1f4d50);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            padding: 10px 20px;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .nav-link {
+            color: #fff !important;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #d9f7ff !important;
+        }
+
+        .btn-light {
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-light:hover {
+            background-color: #d9f7ff;
+            color: #2b686c;
         }
 
         .confirmation-container {
@@ -58,6 +92,34 @@
 </head>
 
 <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'view_profile' %}">TreeMart</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'tree_list' %}">Tree List</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'plant_guide' %}">Plant Guide</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">Profile</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'view_profile' %}">View Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form method="GET" action="{% url 'tree_list' %}" class="d-flex ms-3">
+                    <input type="text" name="q" class="form-control" placeholder="Search trees..." value="{{ request.GET.q }}">
+                    <button class="btn btn-light ms-2" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
     <div class="confirmation-container text-center">
         <h1 class="confirmation-title">Thank you for your order!</h1>
         <p class="text-muted">We appreciate your purchase and are excited to serve you.</p>
