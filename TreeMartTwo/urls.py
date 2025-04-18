@@ -28,6 +28,8 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('plant_guide/', include('plant_guide.urls')),
     path('orders/', include('orders.urls')),
+    path('chat/', include('chat.urls')),
+
 
 ]
 if settings.DEBUG:

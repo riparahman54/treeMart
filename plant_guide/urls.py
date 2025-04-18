@@ -8,5 +8,7 @@ urlpatterns = [
 
     path('select-season/', views.select_season, name='select_season'),
     path('plants-by-season/<season>/', views.plants_by_season, name='plants_by_season'),
+    path('weather/', views.weather_check, name='weather'),
+
 
 ]
